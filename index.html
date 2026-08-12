@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>El-Sayed & Menna - Wedding Invitation</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Lato:wght@300;400;700&display=swap"
+        rel="stylesheet" />
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <!-- Audio Element -->
+    <audio id="bg-music" loop>
+        <source src="assets/audio/background.mp3" type="audio/mpeg" />
+        Your browser does not support the audio element.
+    </audio>
+
+    <!-- Music Control Button -->
+    <button id="music-btn" class="music-btn floating" aria-label="Play Music">
+        <i class="fas fa-music"></i>
+    </button>
+
+    <!-- Cover Screen -->
+    <div id="cover" class="cover-screen active">
+        <div class="cover-card">
+            <div class="heart-icon">
+                <i class="fas fa-heart"></i>
+            </div>
+
+            <div class="names-main">
+                <span class="name">El-Sayed</span>
+                <span class="ampersand">&</span>
+                <span class="name">Menna</span>
+            </div>
+
+            <div class="divider">
+                <hr />
+                <i class="fas fa-gift" style="color: #1a4379; margin: 0 10px; font-size: 0.8rem"></i>
+                <hr />
+            </div>
+
+            <p class="date">September 12, 2026</p>
+            <p class="invite-text">Cordially Invites</p>
+
+            <button id="open-btn" class="btn-primary">Open</button>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main id="main-content" class="main-content hidden">
+        <!-- Header Section -->
+        <section class="section header-section">
+            <div class="floral-frame-container">
+                <img src="assets/images/floral_frame.png" alt="Decorative Frame" class="frame-bg-img" />
+                <div class="frame-content-overlay">
+                    <h1 class="names-large">EL-SAYED</h1>
+                    <span class="ampersand-small">&</span>
+                    <h1 class="names-large">MENNA</h1>
+                </div>
+            </div>
+        </section>
+
+        <!-- Ceremony Info Section -->
+        <section class="section info-section">
+            <h2 class="section-title">CEREMONY INFO</h2>
+
+            <div class="parents-row">
+                <div class="parent">
+                    <span class="title">Mr.</span>
+                    <p class="name">Salah El-Saadany</p>
+                </div>
+                <div class="vertical-line"></div>
+                <div class="parent">
+                    <span class="title">Mr.</span>
+                    <p class="name">Ahmed Aboelanin</p>
+                </div>
+            </div>
+
+            <p class="announcement">
+                WE JOYFULLY ANNOUNCE<br />THE WEDDING OF OUR CHILDREN
+            </p>
+
+            <div class="couple-details">
+                <div class="person">
+                    <h3 class="dr-name">Dr El-sayed Salah El-saadany</h3>
+                    <p class="role">ELDEST SON</p>
+                </div>
+                <span class="ampersand-medium">&</span>
+                <div class="person">
+                    <h3 class="dr-name">Dr Menna Allah Ahmed Aboelanin</h3>
+                    <p class="role">YOUNGEST DAUGHTER</p>
+                </div>
+            </div>
+            <div class="floral-divider">
+                <div class="floral-center"></div>
+            </div>
+        </section>
+
+        <!-- Photo Gallery Section -->
+        <section class="section gallery-section">
+            <h2 class="section-title">PHOTO GALLERY</h2>
+            <div class="gallery-container">
+                <!-- Placeholder for user's image -->
+                <div class="image-placeholder">
+                    <img src="assets/images/photo.jpeg" alt="Couple Photo" />
+                </div>
+            </div>
+        </section>
+
+        <!-- Reception Info Section -->
+        <section class="section reception-section">
+            <h2 class="section-title">RECEPTION INFO</h2>
+            <p class="subtitle">THE RECEPTION WILL TAKE PLACE AT:</p>
+
+            <div class="time-box">
+                <span class="time">9:00 PM</span>
+                <div class="date-row">
+                    <span>SATURDAY</span>
+                    <span class="divider">|</span>
+                    <span class="day">12</span>
+                    <span class="divider">|</span>
+                    <span>SEPTEMBER</span>
+                </div>
+                <span class="year">2026</span>
+            </div>
+
+            <h3 class="countdown-title">COUNTDOWN</h3>
+            <div class="countdown" id="countdown">
+                <span id="days">00</span> days <span id="hours">00</span> hours
+                <span id="minutes">00</span> min <span id="seconds">00</span> sec
+            </div>
+
+            <!-- Calendar View (Simplified static representation for UI) -->
+            <div class="calendar-wrapper">
+                <div class="calendar-card">
+                    <div class="calendar-corners"></div>
+                    <h4 class="month-title">September 2026</h4>
+                    <div class="calendar-grid">
+                        <div class="weekday">Mo</div>
+                        <div class="weekday">Tu</div>
+                        <div class="weekday">We</div>
+                        <div class="weekday">Th</div>
+                        <div class="weekday">Fr</div>
+                        <div class="weekday">Sa</div>
+                        <div class="weekday">Su</div>
+                        <div class="day-num empty"></div>
+                        <div class="day-num">1</div>
+                        <div class="day-num">2</div>
+                        <div class="day-num">3</div>
+                        <div class="day-num">4</div>
+                        <div class="day-num">5</div>
+                        <div class="day-num">6</div>
+                        <div class="day-num">7</div>
+                        <div class="day-num">8</div>
+                        <div class="day-num">9</div>
+                        <div class="day-num">10</div>
+                        <div class="day-num">11</div>
+                        <div class="day-num selected">
+                            <i class="fas fa-heart"></i><span style="position: relative; z-index: 2">12</span>
+                        </div>
+                        <div class="day-num">13</div>
+                        <div class="day-num">14</div>
+                        <div class="day-num">15</div>
+                        <div class="day-num">16</div>
+                        <div class="day-num">17</div>
+                        <div class="day-num">18</div>
+                        <div class="day-num">19</div>
+                        <div class="day-num">20</div>
+                        <div class="day-num">21</div>
+                        <div class="day-num">22</div>
+                        <div class="day-num">23</div>
+                        <div class="day-num">24</div>
+                        <div class="day-num">25</div>
+                        <div class="day-num">26</div>
+                        <div class="day-num">27</div>
+                        <div class="day-num">28</div>
+                        <div class="day-num">29</div>
+                        <div class="day-num">30</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Map Section -->
+        <section class="section map-section">
+            <h2 class="section-title">WEDDING RECEPTION VENUE</h2>
+            <div class="map-container">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d219552.36831029042!2d31.1431039!3d30.7041793!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14f7eb28ecffd185%3A0x5c442f209f24a094!2z2YLYp9i52Ycg2KfZhNmF2KfYs9mHINmF2YrYqiDYutmF2LE!5e0!3m2!1sen!2seg!4v1786493889467!5m2!1sen!2seg"
+                    width="600" height="450" style="border: 0" allowfullscreen="" loading="lazy"
+                    referrerpolicy="strict-origin-when-cross-origin"></iframe>
+            </div>
+        </section>
+
+        <!-- Guestbook Section -->
+        <section class="section guestbook-section">
+            <h2 class="section-title">GUESTBOOK</h2>
+
+            <div class="guestbook-form-container">
+                <form id="guestbook-form">
+                    <div class="form-group">
+                        <input type="text" id="guest-name" placeholder="Enter your name*" required />
+                    </div>
+                    <div class="form-group">
+                        <textarea id="guest-wishes" placeholder="Enter your wishes*" rows="3" required></textarea>
+                    </div>
+                    <div class="form-actions">
+                        <i class="fas fa-magic icon-left" style="color: #a0aec0; margin-right: 15px"></i>
+                        <button type="submit" class="btn-primary"
+                            style="width: auto; padding: 12px 30px; border-radius: 25px">
+                            SEND WISHES
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="wishes-list" id="wishes-list">
+                <!-- Sample initial wish -->
+                <div class="wish-card">
+                    <div class="wish-header">
+                        <span class="wish-name">Mai</span>
+                        <span class="wish-time">8/12/2026, 2:26:22 AM</span>
+                    </div>
+                    <div class="wish-body">
+                        <span class="hearts" style="color: red">❤️❤️❤️</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="footer" style="
+          text-align: center;
+          padding: 20px;
+          font-family: &quot;Lato&quot;, sans-serif;
+          color: #1a4379;
+          opacity: 0.7;
+        ">
+            <p>Made with ❤️ for El-Sayed & Menna</p>
+        </footer>
+    </main>
+
+    <!-- Custom JS -->
+    <script type="module" src="script.js"></script>
+</body>
+
+</html>

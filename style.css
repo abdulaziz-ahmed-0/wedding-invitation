@@ -1,0 +1,746 @@
+/* CSS Variables */
+:root {
+  --primary-blue: #1b4478;
+  --bg-cream: #fbf9f4;
+  --text-dark: #1b4478;
+  --text-light: #fbf9f4;
+  --accent-gold: #c7a76c;
+  --border-light: #e2dcd0;
+
+  --font-heading: "Playfair Display", serif;
+  --font-text: "Lato", sans-serif;
+}
+
+/* Reset and Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-text);
+  background-color: var(--bg-cream);
+  color: var(--text-dark);
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  position: relative;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url("assets/images/floral_background.png");
+  background-size: cover;
+  background-position: center;
+  opacity: 0.25;
+  /* Low opacity so text is readable */
+  z-index: -1;
+  pointer-events: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+.names-large,
+.names-main {
+  font-family: var(--font-heading);
+  color: var(--primary-blue);
+}
+
+/* Reusable Components */
+.section {
+  padding: 40px 20px;
+  text-align: center;
+  position: relative;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.section-title {
+  font-size: 1.2rem;
+  letter-spacing: 2px;
+  margin-bottom: 30px;
+  text-transform: uppercase;
+}
+
+.btn-primary {
+  background-color: var(--primary-blue);
+  color: var(--text-light);
+  border: none;
+  padding: 12px 40px;
+  border-radius: 25px;
+  font-family: var(--font-text);
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(27, 68, 120, 0.3);
+  transition:
+    transform 0.2s,
+    background-color 0.2s;
+}
+
+.btn-primary:hover {
+  background-color: #123057;
+  transform: translateY(-2px);
+}
+
+/* Animations */
+@keyframes pulse-btn {
+  0% {
+    box-shadow: 0 0 0 0 rgba(27, 68, 120, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(27, 68, 120, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(27, 68, 120, 0);
+  }
+}
+
+@keyframes float-heart {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+/* Music Floating Button */
+.music-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: var(--primary-blue);
+  color: var(--text-light);
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  z-index: 1000;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  display: none;
+  /* Shown after cover opens */
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s;
+}
+
+.music-btn.playing {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(27, 68, 120, 0.7);
+  }
+
+  70% {
+    box-shadow: 0 0 0 15px rgba(27, 68, 120, 0);
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 rgba(27, 68, 120, 0);
+  }
+}
+
+/* Cover Screen */
+.cover-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(135deg, #1f4f8f 0%, #112d54 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  transition:
+    opacity 1s ease-in-out,
+    visibility 1s;
+}
+
+.cover-screen.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.cover-screen.hidden-state {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.cover-card {
+  background-color: var(--bg-cream);
+  width: 90%;
+  max-width: 400px;
+  padding: 40px 20px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Minimal decorative background for cover-card */
+.cover-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url("assets/images/cover-bg.png");
+  /* Placeholder */
+  background-size: cover;
+  background-position: center;
+  opacity: 0.1;
+  pointer-events: none;
+}
+
+.heart-icon {
+  width: 50px;
+  height: 50px;
+  background-color: var(--primary-blue);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto 20px;
+  font-size: 1.2rem;
+  box-shadow: 0 4px 10px rgba(27, 68, 120, 0.4);
+  animation: float-heart 3s ease-in-out infinite;
+}
+
+.names-main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.names-main .name {
+  font-size: 2.2rem;
+  line-height: 1.2;
+}
+
+.names-main .ampersand {
+  font-family: var(--font-heading);
+  font-style: italic;
+  font-size: 1.5rem;
+  margin: 5px 0;
+}
+
+.cover-card .divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.cover-card .divider hr {
+  width: 40px;
+  border: none;
+  border-top: 1px solid var(--primary-blue);
+}
+
+.cover-card .date {
+  font-size: 1.1rem;
+  margin-bottom: 5px;
+  color: var(--primary-blue);
+}
+
+.cover-card .invite-text {
+  font-size: 1rem;
+  margin-bottom: 30px;
+  opacity: 0.8;
+}
+
+#open-btn {
+  animation: pulse-btn 2s infinite;
+}
+
+/* Main Content Visibility */
+.main-content {
+  opacity: 1;
+  transition: opacity 1s ease-in-out;
+}
+
+.main-content.hidden {
+  display: none;
+  opacity: 0;
+}
+
+/* Header Section */
+.header-section {
+  padding-top: 80px;
+}
+
+.floral-frame-container {
+  position: relative;
+  width: 100%;
+  max-width: 550px;
+  /* Big enough to look impressive */
+  margin: 0 auto;
+}
+
+.frame-bg-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  /* Optional: drop shadow for the frame to make it pop */
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.1));
+  opacity: 0.15;
+}
+
+.frame-content-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  /* This padding ensures the text stays inside the white area of the image */
+  padding: 22%;
+}
+
+.names-large {
+  font-size: clamp(1.8rem, 5vw, 3rem);
+  /* Responsive font size */
+  letter-spacing: 2px;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.ampersand-small {
+  font-family: var(--font-heading);
+  font-style: italic;
+  margin: 10px 0;
+  font-size: 1.5rem;
+}
+
+/* Ceremony Info */
+.info-section {
+  background-color: transparent;
+}
+
+.parents-row {
+  display: flex;
+  justify-content: space-around;
+  align-items: stretch;
+  margin-bottom: 30px;
+  border-bottom: 1px solid var(--border-light);
+  padding-bottom: 20px;
+}
+
+.parent {
+  flex: 1;
+}
+
+.parent .title {
+  font-size: 0.9rem;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.parent .name {
+  font-weight: 700;
+  color: var(--primary-blue);
+}
+
+.vertical-line {
+  width: 1px;
+  background-color: var(--border-light);
+}
+
+.announcement {
+  margin: 30px 0;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+  line-height: 1.6;
+}
+
+.couple-details {
+  margin-top: 20px;
+}
+
+.dr-name {
+  font-size: clamp(1.4rem, 4vw, 2rem); /* Bigger, responsive font */
+  font-weight: 400;
+  margin-bottom: 5px;
+  line-height: 1.3;
+}
+
+.role {
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+  opacity: 0.7;
+}
+
+.ampersand-medium {
+  font-family: var(--font-heading);
+  font-style: italic;
+  font-size: 2rem;
+  display: block;
+  margin: 20px 0;
+  color: var(--primary-blue);
+}
+
+.floral-divider {
+  margin-top: 40px;
+  font-size: 1.5rem;
+  color: var(--primary-blue);
+}
+
+/* Gallery Section */
+.gallery-container {
+  width: 100%;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.image-placeholder {
+  position: relative;
+  width: 100%;
+  /* removed fixed height to allow auto aspect ratio based on img */
+  background-color: transparent;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.image-placeholder img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+.placeholder-text {
+  position: absolute;
+  bottom: 10px;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.8);
+  padding: 5px;
+  font-size: 0.8rem;
+}
+
+/* Reception Info */
+.time-box {
+  margin: 20px 0 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.time-box .time {
+  font-size: 2rem; /* Bigger time */
+  font-family: var(--font-heading);
+  margin-bottom: 15px;
+}
+
+.date-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 1rem; /* Bigger */
+  letter-spacing: 1px;
+  margin-bottom: 15px;
+  flex-wrap: nowrap; /* Prevent wrapping */
+}
+
+.date-row .day {
+  font-size: 2.2rem; /* Bigger day number */
+  font-family: var(--font-heading);
+  color: var(--primary-blue);
+}
+
+.date-row .divider {
+  color: var(--primary-blue);
+}
+
+.time-box .year {
+  font-size: 1.6rem; /* Bigger year */
+  font-family: var(--font-heading);
+}
+
+/* Countdown */
+.countdown-title {
+  font-size: 1rem;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+}
+
+.countdown {
+  font-size: 1.1rem; /* Bigger countdown */
+  margin-bottom: 40px;
+  color: var(--text-dark);
+  font-family: var(--font-heading);
+}
+
+/* Calendar Card */
+.calendar-wrapper {
+  position: relative;
+  max-width: 350px;
+  margin: 0 auto 20px;
+  padding: 10px;
+}
+
+.calendar-card {
+  background-color: var(--bg-cream);
+  border: 1px solid var(--accent-gold);
+  border-radius: 10px;
+  padding: 20px;
+  position: relative;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+/* Optional corner decorations if using css */
+.calendar-card::before,
+.calendar-card::after {
+  content: "";
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  border: 2px solid var(--primary-blue);
+  pointer-events: none;
+}
+
+.calendar-card::before {
+  top: 5px;
+  left: 5px;
+  border-right: none;
+  border-bottom: none;
+}
+
+.calendar-card::after {
+  bottom: 5px;
+  right: 5px;
+  border-left: none;
+  border-top: none;
+}
+
+.month-title {
+  font-size: 1rem;
+  margin-bottom: 15px;
+  text-transform: none;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 5px;
+  font-size: 0.8rem;
+}
+
+.calendar-grid .weekday {
+  color: gray;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--primary-blue);
+  margin-bottom: 10px;
+}
+
+.calendar-grid .day-num {
+  padding: 8px 0;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.day-num.selected i {
+  position: absolute;
+  color: var(--primary-blue);
+  font-size: 1.5rem;
+  z-index: 1;
+}
+
+.day-num.selected span {
+  color: white;
+}
+
+.add-to-calendar {
+  color: var(--text-dark);
+  text-decoration: none;
+  font-size: 0.9rem;
+  display: inline-block;
+  margin-top: 10px;
+}
+
+/* Map Section */
+.map-container {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  min-height: 250px;
+  border-radius: 15px;
+  overflow: hidden;
+  border: 2px solid var(--border-light);
+}
+
+/* Guestbook Section */
+.guestbook-form-container {
+  background-color: white;
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+  margin-bottom: 30px;
+  border: 1px solid var(--border-light);
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid var(--border-light);
+  border-radius: 8px;
+  font-family: var(--font-text);
+  font-size: 0.95rem;
+  background-color: #fafafa;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: var(--primary-blue);
+}
+
+.form-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-top: 10px;
+}
+
+.wish-card {
+  background-color: rgba(255, 255, 255, 0.6);
+  border: 1px solid var(--border-light);
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+.wish-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  align-items: center;
+}
+
+.wish-name {
+  font-weight: 700;
+  color: var(--primary-blue);
+  font-size: 1rem;
+}
+
+.wish-time {
+  font-size: 0.75rem;
+  color: gray;
+}
+
+.wish-body {
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+/* Responsive tweaks */
+@media (max-width: 600px) {
+  .header-section {
+    padding-top: 0; /* Remove top gap on mobile */
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .section {
+    padding: 30px 15px;
+  }
+
+  .section-title {
+    font-size: 1rem;
+    letter-spacing: 1.5px;
+  }
+
+  .names-main .name {
+    font-size: 1.8rem;
+  }
+
+  .dr-name {
+    font-size: 1.3rem;
+  }
+
+  .announcement {
+    font-size: 0.85rem;
+  }
+
+  .parents-row {
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+  }
+
+  .vertical-line {
+    width: 60px;
+    height: 1px;
+  }
+
+  .date-row {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .calendar-wrapper {
+    padding: 5px;
+  }
+
+  .calendar-grid {
+    font-size: 0.7rem;
+  }
+
+  .floral-frame-container {
+    max-width: 100%;
+  }
+
+  .map-container {
+    aspect-ratio: 4 / 3;
+  }
+
+  .guestbook-form-container {
+    padding: 15px;
+  }
+
+  .form-actions {
+    justify-content: center;
+  }
+
+  .wish-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+}
